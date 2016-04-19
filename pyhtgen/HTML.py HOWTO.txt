@@ -1,0 +1,128 @@
+HTML.py HOWTO
+
+First have a look at HTML_tutorial.py. It provides examples of how to use
+HTML.py.
+For complete reference see HTML.py.html, and also the source code of HTML.py.
+See http://www.decalage.info/python/html for additional information and updates.
+
+
+
+Basic principles
+
+The HTML module provides two different interfaces: classes and functions.
+The functions simply translate data to HTML source code in a string, while
+classes are a respresentation of data which may be modified in place and
+rendered as HTML code when needed.
+For simple tasks functions are easier to use, while classes provide more
+features.
+
+
+HTML Tables
+
+Basically, an HTML table is stored as a list of rows. Each row is itself a list
+of cells. Each cell is a Python string or any object which may be rendered as
+a string using str().
+
+So the easiest way to create a HTML table is to use a list of lists:
+
+    import HTML
+    table_data = [
+            ['Last name',   'First name',   'Age'],
+            ['Smith',       'John',         30],
+            ['Carpenter',   'Jack',         47],
+            ['Johnson',     'Paul',         62],
+        ]
+    htmlcode = HTML.table(table_data)
+    print htmlcode
+
+A header row may be specified: it will appear in bold in browsers
+
+    table_data = [
+            ['Smith',       'John',         30],
+            ['Carpenter',   'Jack',         47],
+            ['Johnson',     'Paul',         62],
+        ]
+
+    htmlcode = HTML.table(table_data,
+        header_row=['Last name',   'First name',   'Age'])
+    print htmlcode
+
+You may also create a Table object and add rows one by one:
+
+    t = HTML.Table(header_row=['x', 'square(x)', 'cube(x)'])
+    for x in range(1,10):
+        t.rows.append([x, x*x, x*x*x])
+    htmlcode = str(t)
+    print htmlcode
+
+Rows may be any iterable (list, tuple, ...) including a generator:
+(this is useful to save memory when generating a large table)
+
+    def gen_rows(i):
+        'rows generator'
+        for x in range(1,i):
+            yield [x, x*x, x*x*x]
+    htmlcode = HTML.table(gen_rows(10), header_row=['x', 'square(x)', 'cube(x)'])
+    print htmlcode
+
+To choose a specific background color for a cell, use a TableCell object:
+
+    HTML_COLORS = ['Black', 'Green', 'Silver', 'Lime', 'Gray', 'Olive', 'White',
+        'Maroon', 'Navy', 'Red', 'Blue', 'Purple', 'Teal', 'Fuchsia', 'Aqua']
+    t = HTML.Table(header_row=['Name', 'Color'])
+    for colorname in HTML_COLORS:
+        colored_cell = HTML.TableCell(' ', bgcolor=colorname)
+        t.rows.append([colorname, colored_cell])
+    htmlcode = str(t)
+    print htmlcode
+
+A simple way to generate a test report:
+
+    # dictionary of test results, indexed by test id:
+    test_results = {
+            'test 1': 'success',
+            'test 2': 'failure',
+            'test 3': 'success',
+            'test 4': 'error',
+        }
+    # dict of colors for each result:
+    result_colors = {
+            'success':      'lime',
+            'failure':      'red',
+            'error':        'yellow',
+        }
+    t = HTML.Table(header_row=['Test', 'Result'])
+    for test_id in sorted(test_results):
+        # create the colored cell:
+        color = result_colors[test_results[test_id]]
+        colored_result = HTML.TableCell(test_results[test_id], bgcolor=color)
+        # append the row with two cells:
+        t.rows.append([test_id, colored_result])
+    htmlcode = str(t)
+    print htmlcode
+
+-------------------------------------------------------------------------------
+
+ALTERNATIVES
+
+If HTML.py does not suit your needs, there are quite a few other solutions to
+generate HTML from Python:
+
+HTML generators:
+- HTMLTags: http://karrigell.sourceforge.net/en/htmltags.htm or
+            http://code.activestate.com/recipes/366000/
+- markup.py: http://markup.sourceforge.net/
+- makeHTML: http://www.hoboes.com/Mimsy/?ART=128
+- HTMLgen: http://www.python.org/ftp/python/contrib-09-Dec-1999/Network/
+  (used to be http://starship.python.net/crew/friedrich/HTMLgen)
+- html: http://home.arcor.de/jurner/python/
+- pyhtmloo: http://pyhtmloo.sourceforge.net/
+- pyWeb: http://www.freenet.org.nz/python/pyweb/
+- XIST: http://www.livinglogic.de/Python/xist/
+- htmlbuilder.py: http://gflanagan.net/site/python/
+- StupidXML: http://code.google.com/p/stupidxml/
+
+Templating engines:
+- Genshi: http://genshi.edgewall.org/
+- Kid: http://www.kid-templating.org/
+
