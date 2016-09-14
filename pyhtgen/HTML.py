@@ -95,7 +95,44 @@ TABLE_STYLE_THINBORDER = "border: 1px solid #000000; border-collapse: collapse;"
 
 
 #=== CLASSES ===================================================================
-
+class HtmlElement(object):
+    """
+    an HtmlElement is used to create the base element of an HTML page. It is a
+    container for all other elements. Currently creates the head, title, and
+    body elements as part of the html element.
+    
+    Attributes:
+    - titletext: Text to be used in the title block of the head element.
+    - bodyelements: list, additional elements that make up the body of the html
+            document
+    - attribs: dict, additinal attributes for the HTML tag
+    """
+    
+    def __init__(self, titletext="", bodyelements=None, attribs=None):
+        self.titletext    = titletext
+        self.bodyelements = bodyelements
+        if bodyelements==None:
+            self.bodyelements = []
+        self.attribs      = attribs
+        if attribs==None:
+            self.attribs = {}
+            
+    def __str__(self):
+        attribs_str = ""
+        element_str = ""
+        for attr in self.attribs:
+            attribs_str += ' %s="%s"' % (attr, self.attribs[attr])
+        element_str += '<HTML%s>\n' % attribs_str
+        element_str += '  <HEAD>\n'
+        element_str += '      <TITLE>%s</TITLE>\n' % self.titletext
+        element_str += '  </HEAD>\n'
+        element_str += '  <BODY>\n'
+        for element in self.bodyelements:
+            element_str += str(element)
+        element_str += '  </BODY>\n'
+        element_str += '</HTML>\n'
+        return element_str
+        
 class TableCell (object):
     """
     a TableCell object is used to create a cell in a HTML table. (TD or TH)
@@ -430,11 +467,14 @@ if __name__ == '__main__':
     # open an HTML file to show output in a browser
     f = open('test.html', 'w')
 
+    h = HtmlElement('Test Page')
     t = Table()
     t.rows.append(TableRow(['A', 'B', 'C'], header=True))
     t.rows.append(TableRow(['D', 'E', 'F']))
     t.rows.append(('i', 'j', 'k'))
-    f.write(str(t) + '<p>\n')
+#    f.write(str(t) + '<p>\n')
+    h.bodyelements.append(t)
+    h.bodyelements.append('<p>\n')
     print(str(t))
     print('-'*79)
 
@@ -443,14 +483,18 @@ if __name__ == '__main__':
             ['3', '4']
         ], width='100%', header_row=('col1', 'col2'),
         col_width=('', '75%'))
-    f.write(str(t2) + '<p>\n')
+#    f.write(str(t2) + '<p>\n')
+    h.bodyelements.append(t2)
+    h.bodyelements.append('<p>\n')
     print(t2)
     print('-'*79)
 
     t2.rows.append(['5', '6'])
     t2.rows[1][1] = TableCell('new', bgcolor='red')
     t2.rows.append(TableRow(['7', '8'], attribs={'align': 'center'}))
-    f.write(str(t2) + '<p>\n')
+#    f.write(str(t2) + '<p>\n')
+    h.bodyelements.append(t2)
+    h.bodyelements.append('<p>\n')
     print(t2)
     print('-'*79)
 
@@ -460,12 +504,14 @@ if __name__ == '__main__':
             ['Carpenter',   'Jack',         47,    7],
             ['Johnson',     'Paul',         62,    10.55],
         ]
-    htmlcode = HTML.table(table_data,
+    htmlcode = Table(table_data,
         header_row = ['Last name',   'First name',   'Age', 'Score'],
         col_width=['', '20%', '10%', '10%'],
         col_align=['left', 'center', 'right', 'char'],
         col_styles=['font-size: large', '', 'font-size: small', 'background-color:yellow'])
-    f.write(htmlcode + '<p>\n')
+#    f.write(htmlcode + '<p>\n')
+    h.bodyelements.append(htmlcode)
+    h.bodyelements.append('<p>\n')
     print(htmlcode)
     print('-'*79)
 
@@ -480,14 +526,23 @@ if __name__ == '__main__':
             yield (x, x*x)
 
     t = Table(rows=gen_table_squares(10), header_row=('x', 'square(x)'))
-    f.write(str(t) + '<p>\n')
+ #   f.write(str(t) + '<p>\n')
+    h.bodyelements.append(t)
+    h.bodyelements.append('<p>\n')
 
     print '-'*79
     l = List(['aaa', 'bbb', 'ccc'])
-    f.write(str(l) + '<p>\n')
+ #   f.write(str(l) + '<p>\n')
+    h.bodyelements.append(l)
+    h.bodyelements.append('<p>\n')
     l.ordered = True
-    f.write(str(l) + '<p>\n')
+#    f.write(str(l) + '<p>\n')
+    h.bodyelements.append(l)
+    h.bodyelements.append('<p>\n')
     l.start=10
-    f.write(str(l) + '<p>\n')
+#    f.write(str(l) + '<p>\n')
+    h.bodyelements.append(l)
+    h.bodyelements.append('<p>\n')
 
+    f.write(str(h))    
     f.close()
