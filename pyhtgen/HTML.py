@@ -145,7 +145,7 @@ class TableCell (object):
         if self.style:   self.attribs['style']   = self.style
         for attr in self.attribs:
             attribs_str += ' %s="%s"' % (attr, self.attribs[attr])
-        if self.text:
+        if self.text is not None:
             text = str(self.text)
         else:
             # An empty cell should at least contain a non-breaking space
