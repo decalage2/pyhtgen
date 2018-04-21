@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#MAC Directory Files
+.DS_Store
+
+#Test Output File
+test.html
