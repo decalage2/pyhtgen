@@ -23,10 +23,10 @@ table_data = [
     ]
 
 htmlcode = HTML.table(table_data)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 #-------------------------------------------------------------------------------
 
@@ -40,10 +40,10 @@ table_data = [
 
 htmlcode = HTML.table(table_data,
     header_row=['Last name',   'First name',   'Age'])
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 #-------------------------------------------------------------------------------
@@ -54,10 +54,10 @@ t = HTML.Table(header_row=['x', 'square(x)', 'cube(x)'])
 for x in range(1,10):
     t.rows.append([x, x*x, x*x*x])
 htmlcode = str(t)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 #-------------------------------------------------------------------------------
@@ -71,10 +71,10 @@ def gen_rows(i):
         yield [x, x*x, x*x*x]
 
 htmlcode = HTML.table(gen_rows(10), header_row=['x', 'square(x)', 'cube(x)'])
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 #-------------------------------------------------------------------------------
@@ -90,10 +90,10 @@ for colorname in HTML_COLORS:
     colored_cell = HTML.TableCell(' ', bgcolor=colorname)
     t.rows.append([colorname, colored_cell])
 htmlcode = str(t)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 #-------------------------------------------------------------------------------
@@ -123,10 +123,10 @@ for test_id in sorted(test_results):
     # append the row with two cells:
     t.rows.append([test_id, colored_result])
 htmlcode = str(t)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 #-------------------------------------------------------------------------------
 
@@ -142,8 +142,8 @@ htmlcode = HTML.table(table_data,
     col_align=['left', 'center', 'right', 'char'],
     col_styles=['font-size: large', '', 'font-size: small', 'background-color:yellow'])
 f.write(htmlcode + '<p>\n')
-print htmlcode
-print '-'*79
+print (htmlcode)
+print ('-'*79)
 
 
 
@@ -153,19 +153,19 @@ print '-'*79
 
 a_list = ['john', 'paul', 'jack']
 htmlcode = HTML.list(a_list)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 # 2) it is easy to change it into a numbered (ordered) list:
 
 htmlcode = HTML.list(a_list, ordered=True)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 # 3) Lines of a list may also be added one by one, when using the List class:
@@ -174,10 +174,10 @@ html_list = HTML.List()
 for i in range(1,10):
     html_list.lines.append('square(%d) = %d' % (i, i*i))
 htmlcode = str(html_list)
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 # 4) To save memory, a large list may be built from a generator:
@@ -187,10 +187,10 @@ def gen_lines(i):
     for x in range(1,i):
         yield 'square(%d) = %d' % (x, x*x)
 htmlcode = HTML.list(gen_lines(10))
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 #=== LINKS ===================================================================
@@ -198,11 +198,11 @@ print '-'*79
 # How to create a link:
 
 htmlcode = HTML.link('Decalage website', 'http://www.decalage.info')
-print htmlcode
+print (htmlcode)
 f.write(htmlcode)
 f.write('<p>')
-print '-'*79
+print ('-'*79)
 
 
 f.close()
-print '\nOpen the file %s in a browser to see the result.' % HTMLFILE
+print ('\nOpen the file %s in a browser to see the result.' % HTMLFILE)

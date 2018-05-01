@@ -482,7 +482,7 @@ if __name__ == '__main__':
     t = Table(rows=gen_table_squares(10), header_row=('x', 'square(x)'))
     f.write(str(t) + '<p>\n')
 
-    print '-'*79
+    print( '-'*79)
     l = List(['aaa', 'bbb', 'ccc'])
     f.write(str(l) + '<p>\n')
     l.ordered = True
