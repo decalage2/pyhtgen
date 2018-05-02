@@ -21,7 +21,7 @@ kw = {
     'author_email': "decalage (a) laposte.net",
     'url': "http://www.decalage.info/python/html",
     'license': "CeCILL (open-source GPL compatible)",
-    #'py_modules': ['HTML']
+    'py_modules': ['HTML']
     'package_dir': {'pyhtgen': '.'},
     'packages': ['pyhtgen'],
     }
