@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 """
-HTML.py - v0.04 2009-07-28 Philippe Lagadec
+HTML.py - v0.04 2018-05-02 Philippe Lagadec
 
 This module provides a few classes to easily generate HTML code such as tables
 and lists.
@@ -12,8 +12,8 @@ License: CeCILL (open-source GPL compatible), see source code for details.
          http://www.cecill.info
 """
 
-__version__ = '0.04'
-__date__    = '2009-07-28'
+__version__ = '0.05.1'
+__date__    = '2018-05-02'
 __author__  = 'Philippe Lagadec'
 
 #--- LICENSE ------------------------------------------------------------------
