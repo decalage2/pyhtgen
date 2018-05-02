@@ -23,6 +23,6 @@ setup(name='pyhtgen',
       author_email='decalage (a) laposte.net',
       url='http://www.decalage.info/python/html',
       py_modules = ['HTML']
-      package_dir = {'pyhtgen': '.'}
+      #package_dir = {'pyhtgen': '.'}
       #packages=['pyhtgen', 'HTML'],
      )
