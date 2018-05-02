@@ -22,7 +22,7 @@ kw = {
     'url': "http://www.decalage.info/python/html",
     'license': "CeCILL (open-source GPL compatible)",
     'py_modules': ['HTML']
-    'package_dir': ['pyhtgen': '.'],
+    #'package_dir': {'pyhtgen': '.'},
     'packages': ['pyhtgen'],
     }
 
