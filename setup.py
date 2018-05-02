@@ -24,5 +24,5 @@ setup(name='pyhtgen',
       url='http://www.decalage.info/python/html',
       py_modules = ['HTML']
       #package_dir = {'pyhtgen': '.'}
-      packages=['pyhtgen'],
+      #packages=['pyhtgen'],
      )
